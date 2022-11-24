@@ -9,6 +9,7 @@ const Home = () => {
 
     const onClickResultPage = () => {
         navigate(`/search/${searchValue}`);
+        window.location.reload();
     }
 
     const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
@@ -48,109 +49,3 @@ const Home = () => {
 };
 
 export default Home;
-
-/*
-import axios from 'axios';
-import { Octokit } from 'octokit';
-import React, { useEffect, useState } from 'react';
-
-const App = () => {
-  const [followerArray, setFollowerArray]: any = useState([]);
-  const [followingArray, setFollowingArray]: any = useState([]);
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    const octokit = new Octokit({
-      auth: process.env.REACT_APP_GITHUB_KEY,
-    })
-    for (let i = 1; i <= 1000; i++) {
-      const follower = octokit.request('GET /users/{username}/followers{?per_page,page}', {
-        username: 'Ubinquitous',
-        per_page: 100,
-        page: i
-      })
-      follower.then((res) => {
-        if (res.data.length === 0) {
-          return;
-        } else {
-          for (let j = 1; j <= res.data.length; j++) {
-            if (res.data[j]?.login !== undefined) {
-              followerArray.push(res.data[j]?.login)
-            }
-          }
-        }
-      })
-
-      const following = octokit.request('GET /users/{username}/following{?per_page,page}', {
-        username: 'Ubinquitous',
-        per_page: 100,
-        page: i
-      })
-
-      following.then((res) => {
-        if (res.data.length === 0) {
-          setLoading(true)
-          return;
-        } else {
-          for (let j = 1; j <= res.data.length; j++) {
-            if (res.data[j]?.login !== undefined) {
-              followingArray.push(res.data[j]?.login)
-            }
-          }
-        }
-      })
-    }
-
-  }, []);
-
-  return (
-    <div>
-      <button onClick={() => { console.log(followerArray, followingArray, followingArray.filter((x: any) => !followerArray.includes(x)), followerArray.filter((x: any) => !followingArray.includes(x))) }}>CLICK</button>
-      <div>
-        <h1>나를 팔로우하는 사람</h1>
-        {loading ?
-          <>
-            {followerArray?.map((data: any, index: number) => (
-              <div>
-                <span>{data}</span>
-                <br />
-              </div>
-            ))}
-          </> : 'loading...'}
-        <h1>내가 팔로우하는 사람</h1>
-        {loading ?
-          <>
-            {followingArray?.map((data: any, index: number) => (
-              <div>
-                <span>{data}</span>
-                <br />
-              </div>
-            ))}
-          </> : 'loading...'}
-        <h1>나를 맞팔로우하지 않는 사람</h1>
-        {loading ?
-          <>
-            {followingArray.filter((x: any) => !followerArray.includes(x))?.map((data: any, index: number) => (
-              <div>
-                <span>{data}</span>
-                <br />
-              </div>
-            ))}
-          </> : 'loading...'}
-        <h1>내가 맞팔로우하지 않는 사람</h1>
-        {loading ?
-          <>
-            {followerArray.filter((x: any) => !followingArray.includes(x))?.map((data: any, index: number) => (
-              <div>
-                <span>{data}</span>
-                <br />
-              </div>
-            ))}
-          </> : 'loading...'}
-      </div>
-    </div>
-  );
-};
-
-export default App;
- */
