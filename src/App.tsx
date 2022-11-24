@@ -11,7 +11,7 @@ const App = () => {
     const octokit = new Octokit({
       auth: process.env.REACT_APP_GITHUB_KEY,
     })
-    for (let i = 1; i <= 10000; i++) {
+    for (let i = 1; i <= 1000; i++) {
       const follower = octokit.request('GET /users/{username}/followers{?per_page,page}', {
         username: 'Ubinquitous',
         per_page: 100,
@@ -22,7 +22,9 @@ const App = () => {
           return;
         } else {
           for (let j = 1; j <= res.data.length; j++) {
-            followerArray.push(res.data[j])
+            if (res.data[j]?.login !== undefined) {
+              followerArray.push(res.data[j]?.login)
+            }
           }
         }
       })
@@ -39,23 +41,26 @@ const App = () => {
           return;
         } else {
           for (let j = 1; j <= res.data.length; j++) {
-            followingArray.push(res.data[j])
+            if (res.data[j]?.login !== undefined) {
+              followingArray.push(res.data[j]?.login)
+            }
           }
         }
       })
     }
+
   }, []);
 
   return (
     <div>
-      <button onClick={() => { console.log(followerArray) }}>CLICK</button>
+      <button onClick={() => { console.log(followerArray, followingArray, followingArray.filter((x: any) => !followerArray.includes(x)), followerArray.filter((x: any) => !followingArray.includes(x))) }}>CLICK</button>
       <div>
         <h1>Follower List</h1>
         {loading ?
           <>
             {followerArray?.map((data: any, index: number) => (
               <div key={data?.id}>
-                <span>{data?.login} {index + 1}</span>
+                <span>{data?.login}</span>
                 <br />
               </div>
             ))}
@@ -65,7 +70,7 @@ const App = () => {
           <>
             {followingArray?.map((data: any, index: number) => (
               <div key={data?.id}>
-                <span>{data?.login} {index + 1}</span>
+                <span>{data?.login}</span>
                 <br />
               </div>
             ))}
