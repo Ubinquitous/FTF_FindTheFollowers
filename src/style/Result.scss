@@ -87,3 +87,9 @@ a {
     align-items: center;
     font-size: 24px;
 }
+
+.link {
+    @media ALL and (max-width:500px) {
+        display: none;
+    }
+}

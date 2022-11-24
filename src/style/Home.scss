@@ -6,20 +6,33 @@
     justify-content: center;
     align-items: center;
 
+    svg {
+        display: none;
+    }
+
     .title-wrap {
         display: flex;
         flex-direction: column;
         margin-left: 20px;
         height: 200px;
+        justify-content: center;
 
         .title-main {
             font-weight: 800;
             font-size: 70px;
+
+            @media ALL and (max-width:500px) {
+                font-size: 26px;
+            }
         }
 
         .title-descrpition {
             font-weight: 600;
             font-size: 28px;
+
+            @media ALL and (max-width:500px) {
+                font-size: 16px;
+            }
         }
 
         .title-search-wrap {
@@ -35,6 +48,10 @@
                 outline: none;
                 font-weight: 700;
                 font-size: 18px;
+
+                @media ALL and (max-width:500px) {
+                    height: 30px;
+                }
             }
 
             button {
@@ -47,7 +64,22 @@
                 color: white;
                 font-weight: 600;
                 cursor: pointer;
+
+                @media ALL and (max-width:500px) {
+                    width: 80px;
+                    margin-left: -50px;
+                }
             }
         }
     }
+}
+
+.notf-wrap {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 34px;
+    font-weight: 800;
 }
