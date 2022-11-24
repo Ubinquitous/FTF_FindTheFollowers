@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Header from '../components/Header';
-import axios from 'axios';
 import { Octokit } from 'octokit';
 import '../style/Result.scss';
 import '../style/Home.scss';
-import useDidMountEffect from '../hooks/useDidMountEffect';
 
 const Result = () => {
-    const [followerArray, setFollowerArray]: any = useState([]);
-    const [followingArray, setFollowingArray]: any = useState([]);
-    const [followerName, setFollowerName]: any = useState([]);
-    const [followingName, setFollowingName]: any = useState([]);
+    const [followerArray]: any = useState([]);
+    const [followingArray]: any = useState([]);
+    const [followerName]: any = useState([]);
+    const [followingName]: any = useState([]);
     const [loading, setLoading] = useState(false);
     const [userName, setUserName] = useState();
     const [count, setCount] = useState(0);
@@ -20,11 +18,24 @@ const Result = () => {
     const [notFound, setNotFound] = useState(false);
     const searchName: any = useParams();
 
-    useEffect(() => {
+    const octokit = new Octokit({
+        auth: process.env.REACT_APP_GITHUB_KEY,
+    })
 
-        const octokit = new Octokit({
-            auth: process.env.REACT_APP_GITHUB_KEY,
-        })
+    const user = octokit.request('GET /users/{username}', {
+        username: searchName.id,
+        per_page: 100,
+        page: 1
+    })
+
+    user.then((res: any) => {
+        setUserName(res.data.name)
+        setSrc(res.data.avatar_url)
+    }).catch(() => {
+        setNotFound(true)
+    })
+
+    useEffect(() => {
         const follower = octokit.request('GET /users/{username}/followers{?per_page,page}', {
             username: searchName.id,
             per_page: 100,
@@ -38,11 +49,11 @@ const Result = () => {
 
         follower
             .then((res) => {
-                if (res.data.length === 0) {
+                if (!res.data.length) {
                     return;
                 } else {
+                    setDataLen(res.data.length)
                     for (let j = 1; j <= res.data.length; j++) {
-                        setDataLen(res.data.length)
                         if (res.data[j]?.login !== undefined) {
                             followerArray.push(res.data[j])
                             followerName.push(res.data[j].login)
@@ -52,13 +63,13 @@ const Result = () => {
             })
             .then(() => {
                 following.then((res) => {
-                    if (res.data.length === 0) {
+                    if (!res.data.length) {
                         return;
                     } else {
+                        if (res.data.length > dataLen) {
+                            setDataLen(res.data.length);
+                        }
                         for (let j = 1; j <= res.data.length; j++) {
-                            if (res.data.length > dataLen) {
-                                setCount(res.data.length);
-                            }
                             if (res.data[j]?.login !== undefined) {
                                 followingArray.push(res.data[j])
                                 followingName.push(res.data[j].login)
@@ -67,19 +78,6 @@ const Result = () => {
                     }
                 })
             })
-
-        const user = octokit.request('GET /users/{username}', {
-            username: searchName.id,
-            per_page: 100,
-            page: count
-        })
-
-        user.then((res: any) => {
-            setUserName(res.data.name)
-            setSrc(res.data.avatar_url)
-        }).catch(() => {
-            setNotFound(true)
-        })
     }, [count]);
 
     useEffect(() => {
