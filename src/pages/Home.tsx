@@ -1,4 +1,4 @@
-import React, { ChangeEvent, InputHTMLAttributes, useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import '../style/Home.scss';
@@ -8,8 +8,13 @@ const Home = () => {
     const navigate = useNavigate();
 
     const onClickResultPage = () => {
-        navigate(`/search/${searchValue}`);
-        window.location.reload();
+        if (!searchValue) {
+            alert('Please enter your username.')
+            return;
+        } else {
+            navigate(`/search/${searchValue}`);
+            window.location.reload();
+        }
     }
 
     const onChangeValue = (e: ChangeEvent<HTMLInputElement>) => {
