@@ -1,0 +1,53 @@
+.home-wrap {
+    background-color: white;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .title-wrap {
+        display: flex;
+        flex-direction: column;
+        margin-left: 20px;
+        height: 200px;
+
+        .title-main {
+            font-weight: 800;
+            font-size: 70px;
+        }
+
+        .title-descrpition {
+            font-weight: 600;
+            font-size: 28px;
+        }
+
+        .title-search-wrap {
+            margin-top: auto;
+            display: flex;
+
+            input {
+                border-radius: 1000px;
+                width: 70%;
+                height: 40px;
+                padding-left: 25px;
+                border: 2px solid #ccc;
+                outline: none;
+                font-weight: 700;
+                font-size: 18px;
+            }
+
+            button {
+                width: 120px;
+                height: 100%;
+                border-radius: 1000px;
+                border: 2px solid #7726d2;
+                background-color: #7726d2;
+                margin-left: -100px;
+                color: white;
+                font-weight: 600;
+                cursor: pointer;
+            }
+        }
+    }
+}

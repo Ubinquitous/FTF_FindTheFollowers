@@ -1,0 +1,53 @@
+.header-wrap {
+    width: 100vw;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    position: fixed;
+
+    .logo-wrap {
+        width: 200px;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+    svg {
+        margin-left: 20px;
+    }
+
+    .logo-text {
+        font-weight: 800;
+        font-size: 22px;
+        margin-left: 5px;
+    }
+
+    .SEO {
+        width: fit-content;
+        height: 100%;
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+
+
+        .link {
+            font-weight: 800;
+            text-decoration: none;
+            color: black;
+            margin: 0 15px 0 15px;
+        }
+
+        .last-link {
+            margin-right: 40px;
+        }
+    }
+}
+
+.pink {
+    color: #C197F6;
+}
+
+.purple {
+    color: #7726d2;
+}
