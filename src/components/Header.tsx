@@ -19,9 +19,15 @@ const Header = () => {
                 <span className='logo-text'><span className='purple'>F</span><span className='pink'>TF</span></span>
             </Link>
             <div className='SEO'>
-                <Link to='/' className='link' ><span className='purple'>Hom</span><span className='pink'>e</span></Link>
-                <Link to='/' className='link' ><span className='pink'>GitH<span className='purple'>ub</span></span></Link>
-                <Link to='/' className='link last-link' ><span className='purple'>Conta</span><span className='pink'>ct us</span></Link>
+                <Link to='/' className='link home' ><span className='purple'>Hom</span><span className='pink'>e</span></Link>
+                <a href='https://github.com/Ubinquitous/FTF_FindTheFollowers'
+                    target={'_blank'}
+                    rel='noreferrer'
+                    className='link github' ><span className='pink'>GitH<span className='purple'>ub</span></span></a>
+                <a href='https://instagram.com/ubin._ing'
+                    target={'_blank'}
+                    rel='noreferrer'
+                    className='link last-link contact' ><span className='purple'>Conta</span><span className='pink'>ct us</span></a>
             </div>
         </div>
     );
